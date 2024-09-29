@@ -1,0 +1,22 @@
+.select__container {
+	position: relative;
+}
+
+.select {
+	outline: none;
+	border: 1px solid #5e6488;
+	padding: 16px;
+
+	appearance: none;
+	background-color: #fff;
+	color: var(--third);
+	width: 100%;
+}
+
+.select__icon {
+	position: absolute;
+	fill: var(--third);
+	top: 50%;
+	right: 16px;
+	transform: translateY(-50%);
+}

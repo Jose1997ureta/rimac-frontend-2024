@@ -1,0 +1,42 @@
+@font-face {
+	font-family: "BRSonoma";
+	src: url("./assets/fonts/BRSonoma-Bold.otf") format("opentype");
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: "BRSonoma";
+	src: url("./assets/fonts/BRSonoma-SemiBold.otf") format("opentype");
+	font-weight: 600;
+	font-style: normal;
+}
+@font-face {
+	font-family: "BRSonoma";
+	src: url("./assets/fonts/BRSonoma-Medium.otf") format("opentype");
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "BRSonoma";
+	src: url("./assets/fonts/BRSonoma-Regular.otf") format("opentype");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--primary: #ff1c44;
+	--secondary: #4f4fff;
+	--third: #03050f;
+	--text: #141938;
+}
+
+*,
+*::before,
+*::after {
+	font-family: "BRSonoma", sans-serif;
+}
