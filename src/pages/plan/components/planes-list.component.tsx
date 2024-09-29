@@ -88,7 +88,9 @@ export const PlanesListComponent = ({ idType }: Props) => {
 
 					<ul className="flex flex-col gap-y-6">
 						{el.description.map((d) => (
-							<li className="list-disc ml-[18px]">{d}</li>
+							<li className="list-disc ml-[18px]" key={d}>
+								{d}
+							</li>
 						))}
 					</ul>
 

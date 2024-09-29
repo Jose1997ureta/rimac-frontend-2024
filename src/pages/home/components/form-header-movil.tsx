@@ -8,7 +8,9 @@ export const FormHeaderMovilComponent = () => {
 					</h3>
 				</div>
 
-				<h1 className="text-[28px] font-bold">Creado para ti y tu familia</h1>
+				<h1 className="text-[28px] font-bold leading-[40px]">
+					Creado para ti y tu familia
+				</h1>
 			</div>
 
 			<div className="max-w-[136px] overflow-hidden rounded-[20px] z-10">

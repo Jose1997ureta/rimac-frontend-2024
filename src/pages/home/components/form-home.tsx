@@ -1,14 +1,10 @@
 import { useFormik } from "formik";
-import {
-	ButtonComponent,
-	CheckBox,
-	Input,
-	Select,
-} from "../../../shared/components";
+import { ButtonComponent, CheckBox, Input, Select } from "@/shared/components";
 import { initialValuesFormik, validationSchema } from "../formik/home.formik";
 import { twMerge } from "tailwind-merge";
-import { useAuthContext } from "../../../shared/hooks/use-general.context";
+import { useAuthContext } from "@/shared/hooks";
 import { homeService } from "../services/home.service";
+import { Data } from "@/shared/constants/data";
 
 export const FormHomeComponent = () => {
 	const { handleSaveAuth } = useAuthContext();
@@ -21,6 +17,7 @@ export const FormHomeComponent = () => {
 		touched,
 		handleSubmit,
 		setFieldValue,
+		setFieldError,
 	} = useFormik({
 		initialValues: initialValuesFormik,
 		validationSchema: validationSchema,
@@ -29,7 +26,9 @@ export const FormHomeComponent = () => {
 
 	const handleLogin = async () => {
 		if (values.phone !== "5130216147" || values.nro_document !== "30216147") {
-			return alert();
+			setFieldError("phone", " ");
+			setFieldError("nro_document", " ");
+			return;
 		}
 
 		const { rpta, error } = await homeService.getUser();
@@ -61,12 +60,15 @@ export const FormHomeComponent = () => {
 						name="type_document"
 						value={values.type_document}
 						onChange={handleChange}
+						data={Data.typeDocument}
 					/>
 					<Input
 						value={values.nro_document}
 						className={twMerge(
 							"rounded-tl-none rounded-bl-none",
-							errors.nro_document && touched.nro_document && "border-red-500"
+							errors.nro_document &&
+								touched.nro_document &&
+								"border-red-500 text-red-500"
 						)}
 						classNameContainer="flex-1 ml-[-1px]"
 						pattern="number"
@@ -78,7 +80,7 @@ export const FormHomeComponent = () => {
 				</div>
 
 				{touched.nro_document && (
-					<p className="text-red-500 text-sm mt-1">{errors.nro_document}</p>
+					<p className="text-red-500 text-xs mt-1.5">{errors.nro_document}</p>
 				)}
 			</div>
 
@@ -95,7 +97,7 @@ export const FormHomeComponent = () => {
 			/>
 
 			<CheckBox
-				id=""
+				id="privacidad"
 				onChange={(state) => setFieldValue("isPrivacidad", state)}
 				value={values.isPrivacidad}
 				label="Acepto lo Política de Privacidad"
@@ -105,7 +107,7 @@ export const FormHomeComponent = () => {
 			/>
 
 			<CheckBox
-				id=""
+				id="politica"
 				onChange={(state) => setFieldValue("isComunication", state)}
 				value={values.isComunication}
 				label="Acepto la Política Comunicaciones Comerciales"
@@ -113,7 +115,7 @@ export const FormHomeComponent = () => {
 				touched={touched.isComunication}
 			/>
 
-			<a className="link_terminos" href="" onClick={(e) => e.preventDefault()}>
+			<a className="link__terminos" href="" onClick={(e) => e.preventDefault()}>
 				Aplican Términos y Condiciones.
 			</a>
 

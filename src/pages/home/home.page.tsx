@@ -7,7 +7,7 @@ import "./styles/home.style.css";
 export const HomePage = () => {
 	return (
 		<ContainerLayout>
-			<div className="md:py-8 pt-0 pb-[120px] px-6 home__container">
+			<div className="container__layout home__container">
 				<picture>
 					<source
 						media="(max-width: 768px)"
@@ -21,7 +21,7 @@ export const HomePage = () => {
 				</picture>
 
 				<div className="home">
-					<div className="home__image">
+					<div className="home__image hidden md:block">
 						<img src="/images/login-family.png" alt="" />
 					</div>
 

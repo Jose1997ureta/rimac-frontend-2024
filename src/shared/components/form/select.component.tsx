@@ -1,4 +1,4 @@
-import "../../styles/form/select.css";
+import "@/shared/styles/form/select.css";
 import { IoIosArrowDown } from "react-icons/io";
 import { twMerge } from "tailwind-merge";
 
@@ -9,6 +9,7 @@ interface Props {
 	value: string;
 	onChange?: React.ChangeEventHandler<HTMLSelectElement>;
 	onBlur?: React.FocusEventHandler<HTMLSelectElement>;
+	data: { id: string; name: string }[];
 }
 
 export const Select = ({
@@ -18,6 +19,7 @@ export const Select = ({
 	value,
 	onBlur,
 	onChange,
+	data,
 }: Props) => {
 	return (
 		<div className={twMerge("select__container", classNameContainer)}>
@@ -28,8 +30,9 @@ export const Select = ({
 				onBlur={onBlur}
 				name={name}
 			>
-				<option value="dni">DNI</option>
-				<option value="ruc">RUC</option>
+				{data.map((el) => (
+					<option value={el.id}>{el.name}</option>
+				))}
 			</select>
 
 			<IoIosArrowDown className="select__icon" />

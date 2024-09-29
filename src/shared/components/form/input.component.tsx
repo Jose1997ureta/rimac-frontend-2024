@@ -3,7 +3,6 @@ import {
 	FC_ValidatePatterInput,
 	PatternInputProps,
 } from "../../functions/pattern";
-import "../../styles/form/input.css";
 import { twMerge } from "tailwind-merge";
 
 interface Props {
@@ -43,9 +42,12 @@ export const Input = ({
 		}
 	};
 
-	const classInput = clsx("input border border-[#5e6488] rounded-lg", {
-		"border-red-500": error && touched,
-	});
+	const classInput = clsx(
+		"outline-none px-4 py-4 bg-white w-full border border-[#5e6488] text-third rounded-lg",
+		{
+			"border-red-500 text-red-500": error && touched,
+		}
+	);
 
 	return (
 		<div className={twMerge("relative w-full", classNameContainer)}>
@@ -61,7 +63,9 @@ export const Input = ({
 				maxLength={maxLength}
 			/>
 
-			{error && touched && <p className="text-red-500 text-sm mt-1">{error}</p>}
+			{error && touched && (
+				<p className="text-red-500 text-xs mt-1.5">{error}</p>
+			)}
 		</div>
 	);
 };

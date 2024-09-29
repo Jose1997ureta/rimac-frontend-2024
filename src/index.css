@@ -40,3 +40,8 @@
 *::after {
 	font-family: "BRSonoma", sans-serif;
 }
+
+.container__layout {
+	max-width: 1176px;
+	width: 100%;
+}
