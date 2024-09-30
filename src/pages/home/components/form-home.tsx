@@ -5,9 +5,11 @@ import { twMerge } from "tailwind-merge";
 import { useAuthContext } from "@/shared/hooks";
 import { homeService } from "../services/home.service";
 import { Data } from "@/shared/constants/data";
+import { useState } from "react";
 
 export const FormHomeComponent = () => {
 	const { handleSaveAuth } = useAuthContext();
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const {
 		values,
@@ -24,29 +26,46 @@ export const FormHomeComponent = () => {
 		onSubmit: () => handleLogin(),
 	});
 
+	const hadleChangeType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		handleChange(e);
+
+		setFieldValue("nro_document", "");
+	};
+
 	const handleLogin = async () => {
-		if (values.phone !== "5130216147" || values.nro_document !== "30216147") {
-			setFieldError("phone", " ");
-			setFieldError("nro_document", " ");
-			return;
-		}
+		try {
+			setLoading(true);
+			if (
+				values.phone !== "987654321" ||
+				values.nro_document !== "12141516" ||
+				values.type_document !== "dni"
+			) {
+				setFieldError("phone", " ");
+				setFieldError("nro_document", " ");
+				return;
+			}
 
-		const { rpta, error } = await homeService.getUser();
+			const { rpta, error } = await homeService.getUser();
 
-		if (error) console.log(error);
+			if (error) console.log(error);
 
-		if (rpta?.status === 200) {
-			const parameter = {
-				nro_document: values.nro_document,
-				type_document: values.type_document,
-				phone: values.phone,
+			if (rpta?.status === 200) {
+				const parameter = {
+					nro_document: values.nro_document,
+					type_document: values.type_document,
+					phone: values.phone,
 
-				name: rpta.data.name ?? "",
-				lastName: rpta.data.lastName ?? "",
-				birthDay: rpta.data.birthDay ?? "",
-			};
+					name: rpta.data.name ?? "",
+					lastName: rpta.data.lastName ?? "",
+					birthDay: rpta.data.birthDay ?? "",
+				};
 
-			handleSaveAuth(parameter);
+				handleSaveAuth(parameter);
+			}
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -59,7 +78,7 @@ export const FormHomeComponent = () => {
 						className="rounded-tr-none rounded-br-none"
 						name="type_document"
 						value={values.type_document}
-						onChange={handleChange}
+						onChange={hadleChangeType}
 						data={Data.typeDocument}
 					/>
 					<Input
@@ -76,6 +95,7 @@ export const FormHomeComponent = () => {
 						onBlur={handleBlur}
 						name="nro_document"
 						maxLength={11}
+						label="Nro. de documento"
 					/>
 				</div>
 
@@ -93,7 +113,8 @@ export const FormHomeComponent = () => {
 				pattern="number"
 				onChange={handleChange}
 				onBlur={handleBlur}
-				maxLength={10}
+				maxLength={9}
+				label="Celular"
 			/>
 
 			<CheckBox
@@ -119,7 +140,12 @@ export const FormHomeComponent = () => {
 				Aplican Términos y Condiciones.
 			</a>
 
-			<ButtonComponent text="Cotiza aquí" onClick={() => handleSubmit()} />
+			<ButtonComponent
+				text="Cotiza aquí"
+				onClick={() => handleSubmit()}
+				loading={loading}
+				disabled={loading}
+			/>
 		</div>
 	);
 };

@@ -3,6 +3,7 @@ import "./index.css";
 import { HomePage } from "./pages/home";
 import { PlanPage } from "./pages/plan/plan.page";
 import { PrivateRoute, PublicRoute } from "./shared/router/router";
+import { ResumenPage } from "./pages/resumen/resumen.page";
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 				</Route>
 				<Route element={<PrivateRoute />}>
 					<Route path="/planes" element={<PlanPage />} />
+					<Route path="/resumen" element={<ResumenPage />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

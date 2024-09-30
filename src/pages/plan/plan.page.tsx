@@ -2,12 +2,13 @@ import "./styles/plan.style.css";
 import { useState } from "react";
 import { ContainerLayout } from "../../shared/layout";
 
-import { IoIosArrowDropleft } from "react-icons/io";
 import { useAuthContext } from "../../shared/hooks/use-general.context";
 import { PlanesListComponent } from "./components/planes-list.component";
 import { DataPlan } from "./constants/data";
 import { PlanTypeComponent } from "./components/plan-type.component";
-import { PlanProgressComponent } from "./components/plan-progress.component";
+
+import { ButtonBackComponent } from "@/shared/components/button-back.component";
+import { ProgressComponent, ProgressMovilComponent } from "@/shared/components";
 
 export const PlanPage = () => {
 	const { authContext } = useAuthContext();
@@ -16,42 +17,39 @@ export const PlanPage = () => {
 
 	return (
 		<ContainerLayout>
-			<section>
-				<PlanProgressComponent />
+			<section className="plan__container">
+				<ProgressComponent />
+				<ProgressMovilComponent />
 
-				<div className="max-w-[928px] py-[40px]  h-full mx-auto">
-					<div className="flex items-center gap-x-2">
-						<IoIosArrowDropleft className="fill-secondary w-5 h-5" />
-						<p className="text-lg text-secondary font-bold">Volver</p>
-					</div>
+				<div className="w-screen md:max-w-[976px] md:py-[40px] py-8 h-full mx-auto">
+					<div className="px-6 md:px-0">
+						<ButtonBackComponent />
 
-					<div className=" mx-auto max-w-[554px] mt-14 mb-5">
-						{/* NOMBRE DEL USUARIO */}
-						<div className="mb-8 text-center">
-							<p className="font-bold text-[40px] leading-[48px] text-text">
-								{authContext?.name} ¿Para quién deseas cotizar?
-							</p>
+						<div className="mx-auto max-w-[554px] md:mt-14 mb-5">
+							{/* NOMBRE DEL USUARIO */}
+							<div className="mb-8 md:text-center text-left">
+								<p className="font-bold md:text-[40px] text-[28px] leading-[36px] md:leading-[48px] text-text">
+									{authContext?.name} ¿Para quién deseas cotizar?
+								</p>
 
-							<p className="text-text text-base mt-2">
-								Selecciona la opción que se ajuste más a tus necesidades.
-							</p>
+								<p className="text-text text-base mt-2">
+									Selecciona la opción que se ajuste más a tus necesidades.
+								</p>
+							</div>
+
+							<div className="flex md:items-center flex-col md:flex-row md:justify-between gap-x-8 gap-y-6">
+								{DataPlan.type.map((el) => (
+									<PlanTypeComponent
+										item={el}
+										typePlan={typePlan}
+										key={el.id}
+										onClick={() => setTypePlan(el.id)}
+									/>
+								))}
+							</div>
 						</div>
-
-						<div className="flex items-center justify-between">
-							{DataPlan.type.map((el) => (
-								<PlanTypeComponent
-									item={el}
-									typePlan={typePlan}
-									key={el.id}
-									onClick={() => setTypePlan(el.id)}
-								/>
-							))}
-						</div>
 					</div>
-
-					<div className="max-w-[928px] mx-auto">
-						<PlanesListComponent idType={typePlan} />
-					</div>
+					<PlanesListComponent idType={typePlan} />
 				</div>
 			</section>
 		</ContainerLayout>

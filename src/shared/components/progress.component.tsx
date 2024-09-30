@@ -1,9 +1,9 @@
-import { DataPlan } from "../constants/data";
+import { DataPlan } from "../../pages/plan/constants/data";
 import { useLayoutEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { PlanProgressItemComponent } from "./plan-progress-item.component";
+import { ProgressItemComponent } from "./progress-item.component";
 
-export const PlanProgressComponent = () => {
+export const ProgressComponent = () => {
 	const location = useLocation();
 	const [activeProgress, setActiveProgress] = useState<number>(0);
 
@@ -13,10 +13,10 @@ export const PlanProgressComponent = () => {
 	}, [location.pathname]);
 
 	return (
-		<div className="bg-[#EDEFFC] py-4 w-full flex justify-center">
+		<div className="bg-[#EDEFFC] py-4 w-full  md:justify-center hidden md:flex">
 			<div className="w-[80%] flex justify-center gap-x-4">
 				{DataPlan.progress.map((el) => (
-					<PlanProgressItemComponent
+					<ProgressItemComponent
 						key={el.id.toString()}
 						item={el}
 						activeProgress={activeProgress}

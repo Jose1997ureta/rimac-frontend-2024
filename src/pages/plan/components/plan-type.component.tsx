@@ -12,7 +12,7 @@ export const PlanTypeComponent = ({ typePlan, onClick, item }: Props) => {
 	return (
 		<div
 			className={twMerge(
-				"w-[256px] h-[212px]bg-white rounded-3xl relative py-10 px-6 cursor-pointer",
+				"md:w-[256px] w-full h-[212px]bg-white rounded-3xl relative py-10 px-6 cursor-pointer",
 				typePlan === item.id ? "border-[3px] border-third" : " "
 			)}
 			style={{
@@ -23,7 +23,7 @@ export const PlanTypeComponent = ({ typePlan, onClick, item }: Props) => {
 			<div
 				className={twMerge(
 					"absolute top-4 right-6 w-6 h-6 rounded-full flex items-center justify-center",
-					typePlan === item.id ? "bg-green-500" : "border border-[#A9AFD9]"
+					typePlan === item.id ? "bg-green-500" : "border border-secondary-400"
 				)}
 			>
 				{typePlan === item.id ? (

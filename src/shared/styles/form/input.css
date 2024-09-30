@@ -1,0 +1,30 @@
+.input__label {
+	color: var(--text);
+	font-size: 16px;
+	position: absolute;
+	left: 16px;
+	top: 50%;
+	transition: 0.2s ease all;
+	transform: translateY(-50%);
+}
+
+.input {
+	appearance: none;
+}
+
+.input::placeholder {
+	color: transparent;
+}
+
+.input:focus ~ .input__label,
+.input:not(:placeholder-shown) ~ .input__label {
+	top: 16px;
+	font-size: 12px;
+	color: #5e6488;
+}
+
+.input:focus,
+.input:not(:placeholder-shown) {
+	padding-top: 24px;
+	padding-bottom: 8px;
+}

@@ -31,7 +31,9 @@ export const Select = ({
 				name={name}
 			>
 				{data.map((el) => (
-					<option value={el.id}>{el.name}</option>
+					<option value={el.id} key={el.id}>
+						{el.name}
+					</option>
 				))}
 			</select>
 

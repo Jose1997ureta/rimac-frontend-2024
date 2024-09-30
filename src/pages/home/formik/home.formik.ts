@@ -11,8 +11,8 @@ export const initialValuesFormik = {
 export const validationSchema = Yup.object().shape({
 	nro_document: Yup.string().required("El campo es requerido"),
 	phone: Yup.string()
-		.matches(/^[0-9]+$/, "Debe ser un número válido")
-		.required("El campo es requerido"),
+		.required("El campo es requerido")
+		.min(9, "No es un número valido"),
 	isPrivacidad: Yup.boolean().oneOf(
 		[true],
 		"Debes aceptar la política de privacidad"

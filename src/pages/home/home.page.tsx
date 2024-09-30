@@ -7,7 +7,7 @@ import "./styles/home.style.css";
 export const HomePage = () => {
 	return (
 		<ContainerLayout>
-			<div className="container__layout home__container">
+			<section className="container__layout home__container">
 				<picture>
 					<source
 						media="(max-width: 768px)"
@@ -50,7 +50,7 @@ export const HomePage = () => {
 						className="absolute h-full top-0 right-0"
 					/>
 				</picture>
-			</div>
+			</section>
 		</ContainerLayout>
 	);
 };

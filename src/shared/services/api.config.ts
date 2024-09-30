@@ -48,8 +48,6 @@ export const httpClient = async ({
 		console.log(e);
 	}
 
-	console.log();
-
 	return {
 		rpta,
 		error,

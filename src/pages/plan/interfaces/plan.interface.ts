@@ -4,3 +4,11 @@ export interface DataTypePlanProps {
 	description: string;
 	img: string;
 }
+
+export interface DataPlanProps {
+	name: string;
+	price: number;
+	priceBase: number;
+	description: string[];
+	age: number;
+}

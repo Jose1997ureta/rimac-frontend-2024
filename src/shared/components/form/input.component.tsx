@@ -5,6 +5,8 @@ import {
 } from "../../functions/pattern";
 import { twMerge } from "tailwind-merge";
 
+import "../../styles/form/input.css";
+
 interface Props {
 	className?: string;
 	classNameContainer?: string;
@@ -19,6 +21,8 @@ interface Props {
 	name?: string;
 	value: string;
 	maxLength?: number;
+
+	label?: string;
 }
 
 export const Input = ({
@@ -30,9 +34,10 @@ export const Input = ({
 	onBlur,
 	onChange,
 	pattern = "all",
-	placeholder,
+	placeholder = "",
 	touched,
 	maxLength,
+	label = "",
 }: Props) => {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
@@ -43,7 +48,7 @@ export const Input = ({
 	};
 
 	const classInput = clsx(
-		"outline-none px-4 py-4 bg-white w-full border border-[#5e6488] text-third rounded-lg",
+		"outline-none px-4 py-4 bg-white w-full text-base border border-[#5e6488] text-third rounded-lg",
 		{
 			"border-red-500 text-red-500": error && touched,
 		}
@@ -51,17 +56,24 @@ export const Input = ({
 
 	return (
 		<div className={twMerge("relative w-full", classNameContainer)}>
-			<input
-				className={twMerge(classInput, className)}
-				name={name}
-				autoComplete="off"
-				type="text"
-				onChange={handleChange}
-				placeholder={placeholder}
-				value={value}
-				onBlur={onBlur}
-				maxLength={maxLength}
-			/>
+			<div className="relative">
+				<input
+					id={name}
+					className={twMerge("input", classInput, className)}
+					name={name}
+					autoComplete="off"
+					type="text"
+					onChange={handleChange}
+					placeholder={placeholder}
+					value={value}
+					onBlur={onBlur}
+					maxLength={maxLength}
+				/>
+
+				<label htmlFor={name} className="input__label">
+					{label}
+				</label>
+			</div>
 
 			{error && touched && (
 				<p className="text-red-500 text-xs mt-1.5">{error}</p>
