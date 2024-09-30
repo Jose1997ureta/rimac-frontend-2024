@@ -3,12 +3,12 @@ import { useState } from "react";
 import { ContainerLayout } from "../../shared/layout";
 
 import { useAuthContext } from "../../shared/hooks/use-general.context";
-import { PlanesListComponent } from "./components/planes-list.component";
 import { DataPlan } from "./constants/data";
 import { PlanTypeComponent } from "./components/plan-type.component";
 
 import { ButtonBackComponent } from "@/shared/components/button-back.component";
 import { ProgressComponent, ProgressMovilComponent } from "@/shared/components";
+import { PlanesListContainerComponent } from "./components/planes-list-container.component";
 
 export const PlanPage = () => {
 	const { authContext } = useAuthContext();
@@ -49,7 +49,7 @@ export const PlanPage = () => {
 							</div>
 						</div>
 					</div>
-					<PlanesListComponent idType={typePlan} />
+					<PlanesListContainerComponent idType={typePlan} />
 				</div>
 			</section>
 		</ContainerLayout>
